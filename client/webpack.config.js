@@ -22,10 +22,33 @@ module.exports = () => {
         template: './index.html',
         title: 'JATE'
       }),
-      // need service work
-      // need manifest.json file
-    ],
+      // *done* need service worker
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
+      }),
+      // *done* need manifest.json file
+      new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
+        name: 'just another text editor',
+        short_name: 'JATE',
+        description: 'javaScript text editor',
+        background_color: '#225ca3',
+        theme_color: '#225ca3',
+        start_url: './',
+        publicPath: './',
+        icons: [
+          {
+            src: path.resolve('src/images/logo.png'),
+            sizes: [96, 128, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
+          },
+        ],
+      }),
 
+      ],
+      
     module: {
       rules: [
         {
