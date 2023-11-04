@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
+const srcDir = './src/js/';
 
 
 // TODO: Add and configure workbox plugins for a service worker and manifest file.
@@ -11,11 +12,11 @@ module.exports = () => {
   return {
     mode: 'development',
     entry: {
-      main: './src/js/index.js',
-      install: './src/js/install.js',
-      header: './src/js/header.js',
-      editor: './src/js/editor.js',
-      database: './src/js/database.js'
+      main: `${srcDir}index.js`,
+      install: `${srcDir}install.js`,
+      header: `${srcDir}header.js`,
+      editor: `${srcDir}editor.js`,
+      database: `${srcDir}database.js`
     },
     output: {
       filename: '[name].bundle.js',
