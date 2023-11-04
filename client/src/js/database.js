@@ -14,6 +14,10 @@ const initdb = async () =>
 
 // *done*: Add logic to a method that accepts some content and adds it to the database
 export const putDb = async (content) => { 
+  try{
+    if (content === null) {
+      console.log('no data to save');
+    } else {
   console.log('post to the database');
 
   const jateDb = await openDB('jate', 1);
@@ -26,13 +30,18 @@ export const putDb = async (content) => {
 
   const result = await request;
   console.log('data saved to the database', result);
+    }
+  }catch (err) {
+    console.log(err)
+  }
 };
 
 // refrenced mini project and class work 
 
 // *done*: Add logic for a method that gets all the content from the database
 export const getDb = async () => {
-  console.log('GET from the database');
+  try {
+  console.log('Getting from the database');
 
   const jateDb = await openDB('jate', 1);
 
@@ -43,9 +52,17 @@ export const getDb = async () => {
   const request = store.getAll();
 
   const result = await request;
-  console.log('result.value', result);
-  return result;
 
-}
+  if (result.length === 0){
+    console.log('no data');
+  }else{
+  console.log('Data', result);
+  return result
+  }
+  return result;
+}catch (err) {
+  console.log(err)
+  }
+};
 
 initdb();
